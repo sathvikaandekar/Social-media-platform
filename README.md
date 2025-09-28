@@ -160,6 +160,32 @@ def user_logout(request):
 def user_login(request):
     # Use Django's built-in authentication views or a custom view
     ...
+    # socialproject/urls.py
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('socials.urls')),
+]
+
+# socials/urls.py
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('register/', views.register, name='register'),
+    path('login/', views.user_login, name='login'),
+    path('logout/', views.user_logout, name='logout'),
+    path('', views.feed, name='feed'),
+    path('profile/<str:username>/', views.profile, name='profile'),
+    path('profile/<str:username>/follow/', views.follow_user, name='follow_user'),
+    path('edit-profile/', views.edit_profile, name='edit_profile'),
+    path('create-post/', views.create_post, name='create_post'),
+    path('post/<int:post_id>/like/', views.like_post, name='like_post'),
+    path('post/<int:post_id>/comment/', views.add_comment, name='add_comment'),
+]
+
     
         
     
