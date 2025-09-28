@@ -29,4 +29,29 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    from django import forms
+from django.contrib.auth.models import User
+from .models import Profile, Post, Comment
+
+class UserRegisterForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password']
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['bio', 'avatar']
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['content']
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['content']
+        
     
